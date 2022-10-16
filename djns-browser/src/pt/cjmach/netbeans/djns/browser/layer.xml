@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
+<filesystem>
+    <folder name="Services">
+        <folder name="Browsers">
+            <file name="djnsbrowser.settings" url="djnsbrowser.xml">
+                <attr name="displayName" bundlevalue="pt.cjmach.netbeans.djns.browser.Bundle#CTL_BrowserName"/>
+                <attr name="hidden" methodvalue="pt.cjmach.netbeans.djns.browser.DjnsBrowserFactory.isHidden"/>
+                <attr name="internal" boolvalue="true"/>
+                <attr name="position" intvalue="10100"/>
+            </file>
+        </folder>
+    </folder>
+</filesystem>

@@ -1,0 +1,8 @@
+<ivy-module version="2.0">
+    <info organisation="pt.cjmach.netbeans" module="djns-swt"/>
+    <dependencies>
+        <dependency org="net.java.dev.jna" name="jna" rev="5.2.0"/>
+        <exclude org="*" ext="*" type="javadoc"/>
+        <exclude org="*" ext="*" type="source"/>
+    </dependencies>
+</ivy-module>
