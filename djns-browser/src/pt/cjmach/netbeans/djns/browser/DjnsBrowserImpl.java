@@ -17,6 +17,7 @@
  */
 package pt.cjmach.netbeans.djns.browser;
 
+import chrriis.dj.nativeswing.NSComponentOptions;
 import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
@@ -25,7 +26,6 @@ import chrriis.dj.nativeswing.swtimpl.components.WebBrowserListener;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserNavigationEvent;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserWindowWillOpenEvent;
 import chrriis.dj.nativeswing.swtimpl.netbeans.NativeInterfaceNetBeansHandler;
-import java.awt.Component;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.net.MalformedURLException;
@@ -71,15 +71,17 @@ public class DjnsBrowserImpl extends HtmlBrowser.Impl {
     @Override
     public void dispose() {
         super.dispose();
-        browser.removeWebBrowserListener(browserListener);
-        browser.disposeNativePeer(false);
-        browser = null;
+        if (browser != null) {
+            browser.removeWebBrowserListener(browserListener);
+            browser.disposeNativePeer(false);
+            browser = null;
+        }
     }
 
     @Override
-    public Component getComponent() {
+    public JWebBrowser getComponent() {
         if (browser == null) {
-            browser = new JWebBrowser();
+            browser = new JWebBrowser(NSComponentOptions.destroyOnFinalization());
             browser.setDefaultPopupMenuRegistered(false);
             browser.setBarsVisible(false);
             browser.addWebBrowserListener(browserListener);
@@ -89,18 +91,18 @@ public class DjnsBrowserImpl extends HtmlBrowser.Impl {
 
     @Override
     public void reloadDocument() {
-        browser.reloadPage();
+        getComponent().reloadPage();
     }
 
     @Override
     public void stopLoading() {
-        browser.stopLoading();
+        getComponent().stopLoading();
     }
 
     @Override
     public void setURL(URL newUrl) {
         if (!newUrl.equals(url)) {
-            browser.navigate(newUrl.toString());
+            getComponent().navigate(newUrl.toString());
             URL old = url;
             url = newUrl;
             propChangeSupport.firePropertyChange(PROP_URL, old, newUrl);
@@ -153,7 +155,7 @@ public class DjnsBrowserImpl extends HtmlBrowser.Impl {
 
     @Override
     public void forward() {
-        browser.navigateForward();
+        getComponent().navigateForward();
     }
 
     @Override
@@ -163,7 +165,7 @@ public class DjnsBrowserImpl extends HtmlBrowser.Impl {
 
     @Override
     public void backward() {
-        browser.navigateBack();
+        getComponent().navigateBack();
     }
 
     @Override
@@ -189,8 +191,8 @@ public class DjnsBrowserImpl extends HtmlBrowser.Impl {
     private void updateBackAndForward() {
         final boolean oldForward = canGoForward;
         final boolean oldBackward = canGoBackward;
-        canGoForward = browser.isForwardNavigationEnabled();
-        canGoBackward = browser.isBackNavigationEnabled();
+        canGoForward = getComponent().isForwardNavigationEnabled();
+        canGoBackward = getComponent().isBackNavigationEnabled();
         if (canGoBackward != oldBackward) {
             propChangeSupport.firePropertyChange(PROP_BACKWARD, oldBackward, canGoBackward);
         }
