@@ -49,3 +49,4 @@ jobs:
           -Dnbplatform.default.netbeans.dest.dir=${{ github.workspace }}/netbeans
           -Dnbplatform.default.harness.dir=${{ github.workspace }}/netbeans/harness
           build
+          
