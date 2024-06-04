@@ -1,0 +1,49 @@
+name: Java CI with Ant
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        name: Checkout project
+    
+      - uses: actions/setup-java@v4
+        name: Set up JDK 11
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          
+      - uses: actions/cache@v4
+        id: cache-netbeans
+        with:
+          path: ./netbeans/
+          key: ${{ runner.os }}-netbeans-${{ hashFiles('**/netbeans/nb/build_info') }}
+          restore-keys: |
+            ${{ runner.os }}-netbeans-
+          
+      # TODO: Create an Action
+      - name: Download NetBeans 18
+        run: wget https://archive.apache.org/dist/netbeans/netbeans/18/netbeans-18-bin.zip
+        if: steps.cache-netbeans.outputs.cache-hit != 'true'
+      
+      - name: Download NetBeans 18 archive checksum
+        run: wget https://archive.apache.org/dist/netbeans/netbeans/18/netbeans-18-bin.zip.sha512
+        if: steps.cache-netbeans.outputs.cache-hit != 'true'
+      
+      - name: Verify NetBeans 18 archive
+        run: sha512sum -c netbeans-18-bin.zip.sha512
+        if: steps.cache-netbeans.outputs.cache-hit != 'true'
+    
+      - name: Unzip Netbeans 18 Archive
+        run: unzip netbeans-18-bin.zip
+        if: steps.cache-netbeans.outputs.cache-hit != 'true'
+        
+      - name: Run the Ant build target
+        run: >-
+          ant -noinput -buildfile build.xml
+            -Dnbplatform.default.netbeans.dest.dir=${{ github.workspace }}/netbeans
+            -Dnbplatform.default.harness.dir=${{ github.workspace }}/netbeans/harness
+            build
