@@ -19,7 +19,7 @@ jobs:
       - uses: actions/cache@v4
         id: cache-netbeans
         with:
-          path: ~/netbeans/
+          path: ${{ github.workspace }}/netbeans
           key: ${{ runner.os }}-netbeans-${{ hashFiles('**/netbeans/nb/build_info') }}
           restore-keys: |
             ${{ runner.os }}-netbeans-${{ hashFiles('**/netbeans/nb/build_info') }}
