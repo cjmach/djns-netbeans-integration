@@ -26,11 +26,11 @@ jobs:
           
       # TODO: Create an Action
       - name: Download NetBeans 18
-        run: wget https://archive.apache.org/dist/netbeans/netbeans/18/netbeans-18-bin.zip
+        run: wget -q https://archive.apache.org/dist/netbeans/netbeans/18/netbeans-18-bin.zip
         if: steps.cache-netbeans.outputs.cache-hit != 'true'
       
       - name: Download NetBeans 18 archive checksum
-        run: wget https://archive.apache.org/dist/netbeans/netbeans/18/netbeans-18-bin.zip.sha512
+        run: wget -q https://archive.apache.org/dist/netbeans/netbeans/18/netbeans-18-bin.zip.sha512
         if: steps.cache-netbeans.outputs.cache-hit != 'true'
       
       - name: Verify NetBeans 18 archive
@@ -38,12 +38,12 @@ jobs:
         if: steps.cache-netbeans.outputs.cache-hit != 'true'
     
       - name: Unzip Netbeans 18 Archive
-        run: unzip netbeans-18-bin.zip
+        run: unzip -q netbeans-18-bin.zip
         if: steps.cache-netbeans.outputs.cache-hit != 'true'
         
       - name: Run the Ant build target
         run: >-
           ant -noinput -buildfile build.xml
-            -Dnbplatform.default.netbeans.dest.dir=${{ github.workspace }}/netbeans
-            -Dnbplatform.default.harness.dir=${{ github.workspace }}/netbeans/harness
-            build
+          -Dnbplatform.default.netbeans.dest.dir=${{ github.workspace }}/netbeans
+          -Dnbplatform.default.harness.dir=${{ github.workspace }}/netbeans/harness
+          build
