@@ -19,10 +19,12 @@ jobs:
       - uses: actions/cache@v4
         id: cache-netbeans
         with:
-          path: ./netbeans/
+          path: ~/netbeans/
           key: ${{ runner.os }}-netbeans-${{ hashFiles('**/netbeans/nb/build_info') }}
           restore-keys: |
+            ${{ runner.os }}-netbeans-${{ hashFiles('**/netbeans/nb/build_info') }}
             ${{ runner.os }}-netbeans-
+            ${{ runner.os }}-
           
       # TODO: Create an Action
       - name: Download NetBeans 18
