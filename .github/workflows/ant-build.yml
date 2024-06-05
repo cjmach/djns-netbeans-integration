@@ -16,33 +16,10 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
           
-      - uses: actions/cache@v4
-        id: cache-netbeans
+      - uses: cjmach/setup-netbeans-action@v1
         with:
-          path: ${{ github.workspace }}/netbeans
-          key: ${{ runner.os }}-netbeans-${{ hashFiles('**/netbeans/nb/build_info') }}
-          restore-keys: |
-            ${{ runner.os }}-netbeans-${{ hashFiles('**/netbeans/nb/build_info') }}
-            ${{ runner.os }}-netbeans-
-            ${{ runner.os }}-
-          
-      # TODO: Create an Action
-      - name: Download NetBeans 18
-        run: wget -q https://archive.apache.org/dist/netbeans/netbeans/18/netbeans-18-bin.zip
-        if: steps.cache-netbeans.outputs.cache-hit != 'true'
-      
-      - name: Download NetBeans 18 archive checksum
-        run: wget -q https://archive.apache.org/dist/netbeans/netbeans/18/netbeans-18-bin.zip.sha512
-        if: steps.cache-netbeans.outputs.cache-hit != 'true'
-      
-      - name: Verify NetBeans 18 archive
-        run: sha512sum -c netbeans-18-bin.zip.sha512
-        if: steps.cache-netbeans.outputs.cache-hit != 'true'
-    
-      - name: Unzip Netbeans 18 Archive
-        run: unzip -q netbeans-18-bin.zip
-        if: steps.cache-netbeans.outputs.cache-hit != 'true'
-        
+          version: '18'
+
       - name: Run the Ant build target
         run: >-
           ant -noinput -buildfile build.xml
