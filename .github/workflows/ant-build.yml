@@ -16,7 +16,7 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
           
-      - uses: cjmach/setup-netbeans-action@d371ce39e03ff3fc60863c8f8a73d4e0ae047d0e
+      - uses: cjmach/setup-netbeans-action@b0b36690ecd78377163059135d7a55b12eba119f
         with:
           version: '18'
 
