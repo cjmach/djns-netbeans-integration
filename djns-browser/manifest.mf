@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-AutoUpdate-Show-In-Client: true
-OpenIDE-Module: pt.cjmach.netbeans.djns.browser
-OpenIDE-Module-Layer: pt/cjmach/netbeans/djns/browser/layer.xml
-OpenIDE-Module-Localizing-Bundle: pt/cjmach/netbeans/djns/browser/Bundle.properties
-OpenIDE-Module-Specification-Version: 1.0
-
