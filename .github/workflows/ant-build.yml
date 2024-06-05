@@ -1,0 +1,29 @@
+name: Java CI with Ant
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        name: Checkout project
+    
+      - uses: actions/setup-java@v4
+        name: Set up JDK 11
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          
+      - uses: cjmach/setup-netbeans-action@v2.1
+        with:
+          version: '18'
+
+      - name: Run the Ant build target
+        run: >-
+          ant -noinput -buildfile build.xml
+          -Dnbplatform.default.netbeans.dest.dir=${{ github.workspace }}/netbeans
+          -Dnbplatform.default.harness.dir=${{ github.workspace }}/netbeans/harness
+          build
+          

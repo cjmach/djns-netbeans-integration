@@ -1,2 +1,2 @@
-# djnsbrowser-netbeans-module
-DJ Native Swing Browser integration in Netbeans
+# djns-netbeans-integration
+DJ Native Swing components integration in Apache NetBeans.
