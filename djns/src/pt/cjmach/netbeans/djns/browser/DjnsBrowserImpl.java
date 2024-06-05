@@ -42,7 +42,7 @@ import org.openide.util.NbBundle;
  *
  * @author cmachado
  */
-public class DjnsBrowserImpl extends HtmlBrowser.Impl {
+class DjnsBrowserImpl extends HtmlBrowser.Impl {
 
     private static final Logger LOGGER = Logger.getLogger(DjnsBrowserImpl.class.getName());
     private static final int PROGRESS_MAX_VALUE = 100;

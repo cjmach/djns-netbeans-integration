@@ -48,7 +48,9 @@
                     </run-dependency>
                 </dependency>
             </module-dependencies>
-            <public-packages/>
+            <public-packages>
+                <package>pt.cjmach.netbeans.djns.browser</package>
+            </public-packages>
         </data>
     </configuration>
 </project>
