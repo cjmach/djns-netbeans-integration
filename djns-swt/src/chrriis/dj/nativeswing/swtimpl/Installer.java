@@ -26,6 +26,11 @@ import java.util.Map;
 import java.util.Set;
 import org.openide.modules.ModuleInstall;
 
+/**
+ * The NetBeans integration object responsible for the activation of the appropriate platform core module.
+ * @author Christopher Deckers
+ * @author Carlos Machado
+ */
 public class Installer extends ModuleInstall {
 
     @Override
