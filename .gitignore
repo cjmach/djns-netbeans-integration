@@ -34,3 +34,7 @@ hs_err_pid*
 /djns-swt-cocoa-macosx-aarch64/build/
 /djns-swt-gtk-linux-aarch64/build/
 /djns-swt-gtk-linux-ppc64/build/
+/djns-swt-gtk-linux-x86_64/nbproject/private/
+/djns-swt-gtk-linux-ppc64/nbproject/private/
+/djns-swt-gtk-linux-aarch64/nbproject/private/
+/djns-swt-cocoa-macosx-aarch64/nbproject/private/
