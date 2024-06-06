@@ -2,5 +2,5 @@ Manifest-Version: 1.0
 AutoUpdate-Show-In-Client: true
 OpenIDE-Module: chrriis.dj.nativeswing.swtcore.gtk.linux.ppc64
 OpenIDE-Module-Localizing-Bundle: chrriis/dj/nativeswing/swtcore/gtk/linux/ppc64/Bundle.properties
-OpenIDE-Module-Specification-Version: 1.0
+OpenIDE-Module-Specification-Version: 1.1
 
