@@ -16,7 +16,7 @@ lists the steps to install the suite:
 6. You must check exactly two modules:
   - **The main module**: DJ Native Swing Integration
   - **The native module**: DJ Native Swing Integration - [Your OS/Arch]
-7. Click on the "Install" button and follow the install wizard instructions.
+7. Click on the "Install" button and follow the instructions of the install wizard.
 
 ## Configuration
 
