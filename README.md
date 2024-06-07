@@ -5,8 +5,8 @@ components in [Apache NetBeans](https://github.com/apache/netbeans).
 
 ## Installation
 
-We use Github Pages to publish the module suite's update site when a new release 
-is created. The following lists the steps to install the suite:
+We use Github Pages to publish the module suite's update site whenever a new 
+release is created. The following lists the steps to install the suite:
 1. Open NetBeans
 2. Click on the menu Tools / Plugins
 3. Select the "Settings" tab
