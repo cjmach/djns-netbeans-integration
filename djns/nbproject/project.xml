@@ -74,6 +74,7 @@
             </module-dependencies>
             <public-packages>
                 <package>pt.cjmach.netbeans.djns.browser</package>
+                <package>pt.cjmach.netbeans.djns.dialog</package>
             </public-packages>
         </data>
     </configuration>

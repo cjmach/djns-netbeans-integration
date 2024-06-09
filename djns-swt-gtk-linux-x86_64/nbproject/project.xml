@@ -23,7 +23,9 @@
                     </run-dependency>
                 </dependency>
             </module-dependencies>
-            <public-packages/>
+            <public-packages>
+                <package>chrriis.dj.nativeswing.swtimpl.components.core</package>
+            </public-packages>
             <class-path-extension>
                 <runtime-relative-path>ext/swt-4.25-gtk-linux-x86_64.jar</runtime-relative-path>
                 <binary-origin>release/modules/ext/swt-4.25-gtk-linux-x86_64.jar</binary-origin>
