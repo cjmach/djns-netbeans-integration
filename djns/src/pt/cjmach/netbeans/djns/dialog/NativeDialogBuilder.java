@@ -40,7 +40,6 @@ public class NativeDialogBuilder {
     private String title;
     private File defaultWorkingDir;
     private String description;
-    // TODO: Allow to add filters
     private final List<FileNameExtensionFilter> filters;
     private FileNameExtensionFilter filter;
     private boolean acceptAllFilesFilter;
