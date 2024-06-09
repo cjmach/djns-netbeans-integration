@@ -18,14 +18,12 @@
 package pt.cjmach.netbeans.djns.browser;
 
 import chrriis.dj.nativeswing.NSComponentOptions;
-import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserEvent;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserListener;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserNavigationEvent;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserWindowWillOpenEvent;
-import chrriis.dj.nativeswing.swtimpl.netbeans.NativeInterfaceNetBeansHandler;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.net.MalformedURLException;
@@ -57,11 +55,6 @@ class DjnsBrowserImpl extends HtmlBrowser.Impl {
     private ProgressHandle progressHandle;
     private int progress;
     private final WebBrowserListener browserListener;
-
-    static {
-        NativeInterfaceNetBeansHandler.initialize();
-        NativeInterface.open();
-    }
 
     public DjnsBrowserImpl() {
         browserListener = new BrowserListener();
