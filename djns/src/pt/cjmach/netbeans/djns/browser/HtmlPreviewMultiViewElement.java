@@ -1,9 +1,24 @@
+/*
+ * Copyright (C) 2024  Carlos Machado
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ */
 package pt.cjmach.netbeans.djns.browser;
 
 import chrriis.dj.nativeswing.NSComponentOptions;
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 import org.netbeans.core.spi.multiview.MultiViewElement;
@@ -30,18 +45,13 @@ import org.openide.windows.TopComponent;
 public class HtmlPreviewMultiViewElement extends MultiViewEditorElement {
 
     private JWebBrowser browser;
-    private boolean needsUpdate = true;
 
     public HtmlPreviewMultiViewElement(Lookup lookup) {
         super(lookup);
         DataObject htmlObject = getLookup().lookup(DataObject.class);
-        htmlObject.addPropertyChangeListener(new PropertyChangeListener() {
-            
-            @Override
-            public void propertyChange(PropertyChangeEvent pce) {
-                if (DataObject.PROP_MODIFIED.equals(pce.getPropertyName())) {
-                    updateName();
-                }
+        htmlObject.addPropertyChangeListener((pce) -> {
+            if (DataObject.PROP_MODIFIED.equals(pce.getPropertyName())) {
+                updateName();
             }
         });
     }
