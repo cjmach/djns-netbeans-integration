@@ -19,8 +19,6 @@ package pt.cjmach.netbeans.djns.browser;
 
 import chrriis.dj.nativeswing.NSComponentOptions;
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 import org.netbeans.core.spi.multiview.MultiViewElement;
@@ -51,13 +49,9 @@ public class HtmlPreviewMultiViewElement extends MultiViewEditorElement {
     public HtmlPreviewMultiViewElement(Lookup lookup) {
         super(lookup);
         DataObject htmlObject = getLookup().lookup(DataObject.class);
-        htmlObject.addPropertyChangeListener(new PropertyChangeListener() {
-            
-            @Override
-            public void propertyChange(PropertyChangeEvent pce) {
-                if (DataObject.PROP_MODIFIED.equals(pce.getPropertyName())) {
-                    updateName();
-                }
+        htmlObject.addPropertyChangeListener((pce) -> {
+            if (DataObject.PROP_MODIFIED.equals(pce.getPropertyName())) {
+                updateName();
             }
         });
     }
