@@ -209,10 +209,12 @@ public class NativeDialogBuilder {
         ArrayList<String> extensionFilterNames = new ArrayList<>();
         int selectedFilter = -1;
         for (int i = 0; i < filters.size(); i++) {
-            FileNameExtensionFilter extensionFilter = filters.get(i);
-            extensionFilters.add(getExtensionFilters(extensionFilter));
-            extensionFilterNames.add(extensionFilter.getDescription());
-            if (extensionFilter == filter) {
+            FileNameExtensionFilter fnef = filters.get(i);
+            String extensionFilter = getExtensionFilters(fnef);
+            String extensionFilterName = getExtensionFilterName(filter.getDescription(), extensionFilter);
+            extensionFilters.add(extensionFilter);
+            extensionFilterNames.add(extensionFilterName);
+            if (fnef == filter) {
                 selectedFilter = i;
             }
         }
@@ -221,7 +223,7 @@ public class NativeDialogBuilder {
                 selectedFilter = 0;
             } else { // filters list does not contain filter
                 String extensionFilter = getExtensionFilters(filter);
-                String extensionFilterName = filter.getDescription();
+                String extensionFilterName = getExtensionFilterName(filter.getDescription(), extensionFilter);
                 selectedFilter = filters.size();
                 extensionFilters.add(extensionFilter);
                 extensionFilterNames.add(extensionFilterName);
@@ -237,6 +239,10 @@ public class NativeDialogBuilder {
                     extensionFilterNames.toArray(String[]::new),
                     selectedFilter);
         }
+    }
+    
+    private String getExtensionFilterName(String description, String extensionFilters) {
+        return String.format("%s (%s)", description, extensionFilters.replace(";", ", "));
     }
 
     private String getExtensionFilters(FileNameExtensionFilter extensionFilter) {

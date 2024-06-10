@@ -3,6 +3,15 @@
 A module suite that integrates [DJ Native Swing](https://github.com/Chrriis/DJ-Native-Swing) 
 components in [Apache NetBeans](https://github.com/apache/netbeans).
 
+## Features
+
+- Allows to set DJ Native Swing Web Browser as the default NetBeans browser. This 
+web browser is displayed inside the main NetBeans window and it's also used to 
+view javadocs, HTML files, etc.
+- Adds a Preview view to the NetBeans HTML editor.
+- Adds [NativeDialogBuilder](https://github.com/cjmach/djns-netbeans-integration/blob/main/djns/src/pt/cjmach/netbeans/djns/dialog/NativeDialogBuilder.java) 
+class that supports the integration of native dialogs in NetBeans.
+
 ## Installation
 
 We use Github Pages to publish the module suite's update site whenever a new 
