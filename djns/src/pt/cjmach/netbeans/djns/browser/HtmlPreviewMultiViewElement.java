@@ -47,7 +47,6 @@ import org.openide.windows.TopComponent;
 public class HtmlPreviewMultiViewElement extends MultiViewEditorElement {
 
     private JWebBrowser browser;
-    private boolean needsUpdate = true;
 
     public HtmlPreviewMultiViewElement(Lookup lookup) {
         super(lookup);
