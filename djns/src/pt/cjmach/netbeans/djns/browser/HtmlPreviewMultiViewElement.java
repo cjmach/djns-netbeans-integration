@@ -19,11 +19,12 @@ package pt.cjmach.netbeans.djns.browser;
 
 import chrriis.dj.nativeswing.NSComponentOptions;
 import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.StyledDocument;
+import java.awt.EventQueue;
+import java.util.Collection;
 import org.netbeans.core.spi.multiview.MultiViewElement;
 import org.netbeans.core.spi.multiview.text.MultiViewEditorElement;
-import org.openide.cookies.EditorCookie;
+import org.openide.cookies.SaveCookie;
+import org.openide.filesystems.FileObject;
 import org.openide.loaders.DataObject;
 import org.openide.util.Lookup;
 import org.openide.util.NbBundle;
@@ -45,46 +46,40 @@ import org.openide.windows.TopComponent;
 public class HtmlPreviewMultiViewElement extends MultiViewEditorElement {
 
     private JWebBrowser browser;
+    Lookup.Result<SaveCookie> saveCookieResult;
 
     public HtmlPreviewMultiViewElement(Lookup lookup) {
         super(lookup);
         DataObject htmlObject = getLookup().lookup(DataObject.class);
         htmlObject.addPropertyChangeListener((pce) -> {
             if (DataObject.PROP_MODIFIED.equals(pce.getPropertyName())) {
-                updateName();
+                EventQueue.invokeLater(() -> updateName());
+            }
+        });
+        saveCookieResult = getLookup().lookupResult(SaveCookie.class);
+        saveCookieResult.addLookupListener((e) -> {
+            Collection<? extends SaveCookie> cookies = saveCookieResult.allInstances();
+            if (cookies.isEmpty()) {
+                EventQueue.invokeLater(() -> {
+                    getVisualRepresentation().reloadPage();
+                });
             }
         });
     }
 
     @Override
-    public void componentShowing() {
-        // TODO: Update content only when there's actually a change.
-        // It's currently updating the content everytime we select the view.
-        getVisualRepresentation().setHTMLContent(getHTMLContent());
-    }
-   
-    private String getHTMLContent() {
-        DataObject htmlObject = getLookup().lookup(DataObject.class);
-        EditorCookie cookie = htmlObject.getCookie(EditorCookie.class);
-        StyledDocument document = cookie.getDocument();
-        if (document == null) {
-            return null;
-        }
-        try {
-            return document.getText(0, document.getLength());
-        } catch (BadLocationException ex) {
-            return "";
-        }
-        
-    }
-
-    @Override
     public JWebBrowser getVisualRepresentation() {
         if (browser == null) {
-            browser = new JWebBrowser(NSComponentOptions.destroyOnFinalization());
+            browser = new JWebBrowser(
+                    NSComponentOptions.destroyOnFinalization(), 
+                    NSComponentOptions.proxyComponentHierarchy());
             browser.setJavascriptEnabled(true);
             browser.setDefaultPopupMenuRegistered(false);
             browser.setBarsVisible(false);
+            
+            DataObject htmlObject = getLookup().lookup(DataObject.class);
+            FileObject file = htmlObject.getPrimaryFile();
+            browser.navigate(file.toURL().toString());
         }
         return browser;
     }
