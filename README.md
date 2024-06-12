@@ -27,6 +27,11 @@ release is created. The following lists the steps to install the suite:
   - **The main module**: DJ Native Swing Integration
   - **The native module**: DJ Native Swing Integration - [Your OS/Arch]
 7. Click on the "Install" button and follow the instructions of the install wizard.
+8. Add the following option to `netbeans_default_options` property in netbeans.conf 
+file, located at [NETBEANS INSTALL DIR]/etc (global config) or [HOME DIR]/.netbeans/[NETBEANS VERSION]/etc 
+(user config, may not exist):
+  - **-J-Dsun.awt.disableMixing=true**
+9. Restart NetBeans.
 
 ## Configuration
 

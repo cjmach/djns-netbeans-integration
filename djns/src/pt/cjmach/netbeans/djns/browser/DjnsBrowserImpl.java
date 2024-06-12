@@ -74,7 +74,7 @@ class DjnsBrowserImpl extends HtmlBrowser.Impl {
     @Override
     public JWebBrowser getComponent() {
         if (browser == null) {
-            browser = new JWebBrowser(NSComponentOptions.destroyOnFinalization());
+            browser = new JWebBrowser(NSComponentOptions.destroyOnFinalization(), NSComponentOptions.proxyComponentHierarchy());
             browser.setDefaultPopupMenuRegistered(false);
             browser.setBarsVisible(false);
             browser.addWebBrowserListener(browserListener);
