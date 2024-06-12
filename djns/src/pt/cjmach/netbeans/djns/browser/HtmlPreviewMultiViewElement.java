@@ -17,12 +17,11 @@
  */
 package pt.cjmach.netbeans.djns.browser;
 
-import chrriis.dj.nativeswing.NSComponentOptions;
-import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 import java.awt.EventQueue;
 import java.util.Collection;
 import org.netbeans.core.spi.multiview.MultiViewElement;
 import org.netbeans.core.spi.multiview.text.MultiViewEditorElement;
+import org.openide.awt.HtmlBrowser;
 import org.openide.cookies.SaveCookie;
 import org.openide.filesystems.FileObject;
 import org.openide.loaders.DataObject;
@@ -45,7 +44,7 @@ import org.openide.windows.TopComponent;
 })
 public class HtmlPreviewMultiViewElement extends MultiViewEditorElement {
 
-    private JWebBrowser browser;
+    private HtmlBrowser browser;
     Lookup.Result<SaveCookie> saveCookieResult;
 
     public HtmlPreviewMultiViewElement(Lookup lookup) {
@@ -60,26 +59,23 @@ public class HtmlPreviewMultiViewElement extends MultiViewEditorElement {
         saveCookieResult.addLookupListener((e) -> {
             Collection<? extends SaveCookie> cookies = saveCookieResult.allInstances();
             if (cookies.isEmpty()) {
-                EventQueue.invokeLater(() -> {
-                    getVisualRepresentation().reloadPage();
-                });
+                if (browser != null) {
+                    EventQueue.invokeLater(() -> {
+                        browser.getBrowserImpl().reloadDocument();
+                    });
+                }
             }
         });
     }
 
     @Override
-    public JWebBrowser getVisualRepresentation() {
+    public HtmlBrowser getVisualRepresentation() {
         if (browser == null) {
-            browser = new JWebBrowser(
-                    NSComponentOptions.destroyOnFinalization(), 
-                    NSComponentOptions.proxyComponentHierarchy());
-            browser.setJavascriptEnabled(true);
-            browser.setDefaultPopupMenuRegistered(false);
-            browser.setBarsVisible(false);
+            browser = new DjnsBrowser(false, false);
             
             DataObject htmlObject = getLookup().lookup(DataObject.class);
             FileObject file = htmlObject.getPrimaryFile();
-            browser.navigate(file.toURL().toString());
+            browser.setURL(file.toURL());
         }
         return browser;
     }
