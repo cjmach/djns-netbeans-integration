@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022  Carlos Machado
+ * Copyright (C) 2022-2025  Carlos Machado
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -17,15 +17,15 @@
  */
 package chrriis.dj.nativeswing.swtcore.win32.win32.x86_64;
 
-/**
- *
- * @author cmachado
- */
 import chrriis.dj.nativeswing.swtimpl.internal.NativeCoreObjectFactory;
 import chrriis.dj.nativeswing.swtimpl.netbeans.NativeCoreAPIProvider;
 
 import org.openide.util.lookup.ServiceProvider;
 
+/**
+ *
+ * @author cmachado
+ */
 @ServiceProvider(service = NativeCoreAPIProvider.class)
 public class APIProvider implements NativeCoreAPIProvider {
 
