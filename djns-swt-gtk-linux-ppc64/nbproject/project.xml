@@ -45,12 +45,12 @@
                 <package>chrriis.dj.nativeswing.swtimpl.components.core</package>
             </public-packages>
             <class-path-extension>
-                <runtime-relative-path>ext/swt-4.25-gtk-linux-ppc64le.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/swt-4.25-gtk-linux-ppc64le.jar</binary-origin>
-            </class-path-extension>
-            <class-path-extension>
                 <runtime-relative-path>ext/DJNativeSwing-SWTCore.jar</runtime-relative-path>
                 <binary-origin>release/modules/ext/DJNativeSwing-SWTCore.jar</binary-origin>
+            </class-path-extension>
+            <class-path-extension>
+                <runtime-relative-path>ext/swt-4.35-gtk-linux-ppc64le.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/swt-4.35-gtk-linux-ppc64le.jar</binary-origin>
             </class-path-extension>
         </data>
     </configuration>
