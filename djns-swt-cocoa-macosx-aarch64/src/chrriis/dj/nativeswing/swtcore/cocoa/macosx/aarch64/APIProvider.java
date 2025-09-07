@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022  Carlos Machado
+ * Copyright (C) 2022-2025  Carlos Machado
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
