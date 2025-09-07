@@ -37,9 +37,11 @@ public class Installer extends ModuleInstall {
     public void restored() {
         Map<String, String> modelMap = new HashMap<>();
         modelMap.put("Windows.64", "chrriis.dj.nativeswing.swtcore.win32.win32.x86_64");
+        modelMap.put("Windows.aarch64", "chrriis.dj.nativeswing.swtcore.win32.win32.aarch64");
         modelMap.put("Linux.64", "chrriis.dj.nativeswing.swtcore.gtk.linux.x86_64");
         modelMap.put("Linux.ppc64", "chrriis.dj.nativeswing.swtcore.gtk.linux.ppc64");
         modelMap.put("Linux.aarch64", "chrriis.dj.nativeswing.swtcore.gtk.linux.aarch64");
+        modelMap.put("Linux.riscv64", "chrriis.dj.nativeswing.swtcore.gtk.linux.riscv64");
         modelMap.put("Mac.64", "chrriis.dj.nativeswing.swtcore.cocoa.macosx.x86_64");
         modelMap.put("Mac.aarch64", "chrriis.dj.nativeswing.swtcore.cocoa.macosx.aarch64");
         String osArch;
@@ -51,6 +53,10 @@ public class Installer extends ModuleInstall {
         String osName;
         if (Utils.IS_WINDOWS) {
             osName = "Windows";
+            String sysOsArch = SystemProperty.OS_ARCH.get();
+            if (sysOsArch.startsWith("arm") || sysOsArch.startsWith("aarch")) {
+                osArch = "aarch64";
+            }
         } else if (Utils.IS_MAC) {
             osName = "Mac";
             String sysOsArch = SystemProperty.OS_ARCH.get();
@@ -64,6 +70,8 @@ public class Installer extends ModuleInstall {
                 osArch = "ppc64";
             } else if (sysOsArch.startsWith("arm") || sysOsArch.startsWith("aarch")) {
                 osArch = "aarch64";
+            } else if (sysOsArch.startsWith("riscv")) {
+                osArch = "riscv64";
             }
         }
         Map<String, String> osNameMap = new HashMap<>();
